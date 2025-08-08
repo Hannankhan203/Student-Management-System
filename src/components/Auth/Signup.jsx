@@ -4,6 +4,7 @@ import { auth } from "../../firebase";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { db, collection, addDoc } from "../../firebase";
+import { FiUser, FiMail, FiLock, FiArrowRight } from "react-icons/fi";
 
 const Signup = () => {
   const [username, setUsername] = useState("");
@@ -25,29 +26,20 @@ const Signup = () => {
       );
       const user = userCredentials.user;
 
-    try {
-      await addDoc(collection(db, "users"), {
-      username: username,
-      email: user.email,
-      password: password,
-      uid: user.uid,
-      createdAt: new Date(),
-    });
-    } catch (firestoreError) {
+      try {
+        await addDoc(collection(db, "users"), {
+          username: username,
+          email: user.email,
+          uid: user.uid,
+          createdAt: new Date(),
+        });
+        navigate("/login");
+      } catch (firestoreError) {
         console.error("Firestore save failed:", firestoreError);
         throw new Error("Failed to save user data");
-    }
-
-    navigate("/login");
-      return { user };
-
+      }
     } catch (err) {
-      const errorCode = err.code;
-      const errorMessage = err.message;
-      setError(errorMessage);
-
-      return { errorCode, errorMessage };
-
+      setError(err.message);
     } finally {
       setLoading(false);
     }
@@ -56,52 +48,77 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await userSignup();
-    setUsername("");
-    setEmail("");
-    setPassword("");
   };
 
   return (
-    <div className="auth-container">
-      <h2 className="auth-title">Sign Up</h2>
+    <div className="signup-container">
+      <div className="signup-card">
+        <div className="signup-header">
+          <h2 className="signup-title">Create Account</h2>
+          <p className="signup-subtitle">Get started with your new account</p>
+        </div>
 
-        {error && <p className="error-message">{error}</p>}
+        {error && <div className="signup-error">{error}</div>}
 
-      <form action="" className="auth-form" onSubmit={handleSubmit}>
-        <label htmlFor="">Username</label>
-        <input
-          type="text"
-          placeholder="Username"
-          className="auth-input"
-          required
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <label htmlFor="">Email</label>
-        <input
-          type="email"
-          placeholder="Email"
-          className="auth-input"
-          required
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <label htmlFor="">Password</label>
-        <input
-          type="password"
-          placeholder="Password"
-          className="auth-input"
-          required
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <p className="auth-navigate">
-          Already have an account? <Link to="/login">Login</Link>
-        </p>
-        <button className="auth-btn" type="submit">
-          {loading ? "Creating Account..." : "Sign Up"}
-        </button>
-      </form>
+        <form className="signup-form" onSubmit={handleSubmit}>
+          <div className="input-group">
+            <div className="input-icon">
+              <FiUser />
+            </div>
+            <input
+              type="text"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className="input-group">
+            <div className="input-icon">
+              <FiMail />
+            </div>
+            <input
+              type="email"
+              placeholder="Email Address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className="input-group">
+            <div className="input-icon">
+              <FiLock />
+            </div>
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+
+          <button type="submit" className="signup-btn" disabled={loading}>
+            {loading ? (
+              <span>Creating Account...</span>
+            ) : (
+              <>
+                <span>Sign Up</span>
+                <FiArrowRight />
+              </>
+            )}
+          </button>
+        </form>
+
+        <div className="signup-footer">
+          Already have an account?{" "}
+          <Link to="/login" className="login-link">
+            Login
+          </Link>
+        </div>
+      </div>
     </div>
   );
 };

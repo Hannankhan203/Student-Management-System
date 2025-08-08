@@ -2,14 +2,13 @@ import React, { useState } from "react";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../../firebase";
 import { Link } from "react-router-dom";
-// import { useNavigate } from "react-router-dom";
+import { FiMail, FiArrowRight, FiCheckCircle } from "react-icons/fi";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-  // const navigate = useNavigate();
 
   const userResetPass = async () => {
     setLoading(true);
@@ -38,34 +37,64 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="auth-container">
-      <h2 className="auth-title">Reset Password</h2>
+    <div className="forgot-container">
+      <div className="forgot-card">
+        <div className="forgot-header">
+          <h2 className="forgot-title">Reset Password</h2>
+          <p className="forgot-subtitle">Enter your email to receive a reset link</p>
+        </div>
 
-      {error && <p className="error-message">{error}</p>}
-      {success && <p className="success-message">Password reset email sent! Check your inbox.</p>}
+        {error && (
+          <div className="forgot-error">
+            {error}
+          </div>
+        )}
 
-      <form className="auth-form" onSubmit={handleSubmit}>
-        <label>Email</label>
-        <input
-          type="email"
-          placeholder="Email"
-          className="auth-input"
-          required
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          disabled={loading}
-        />
-        <p className="auth-navigate">
-          Remember your password? <Link to="/login">Login</Link>
-        </p>
-        <button 
-          className="auth-btn" 
-          type="submit"
-          disabled={loading}
-        >
-          {loading ? "Sending Email..." : "Reset Password"}
-        </button>
-      </form>
+        {success ? (
+          <div className="forgot-success">
+            <FiCheckCircle className="success-icon" />
+            <p>Password reset email sent! Check your inbox.</p>
+          </div>
+        ) : (
+          <form className="forgot-form" onSubmit={handleSubmit}>
+            <div className="input-group">
+              <div className="input-icon">
+                <FiMail />
+              </div>
+              <input
+                type="email"
+                placeholder="Email Address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                disabled={loading}
+              />
+            </div>
+
+            <button 
+              type="submit" 
+              className="forgot-btn" 
+              disabled={loading}
+            >
+              {loading ? (
+                <span>Sending Email...</span>
+              ) : (
+                <>
+                  <span>Reset Password</span>
+                  <FiArrowRight />
+                </>
+              )}
+            </button>
+          </form>
+        )}
+
+        <div className="forgot-footer">
+          Remember your password?{" "}
+          <Link to="/login" className="login-link">
+            Login
+          </Link>
+        </div>
+      </div>
     </div>
   );
 };

@@ -3,6 +3,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { FiLogIn, FiMail, FiLock, FiArrowRight } from "react-icons/fi";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -16,23 +17,10 @@ const Login = () => {
     setError("");
 
     try {
-      const userCredentials = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      const user = userCredentials.user;
-
-    navigate("/dashboard");
-      return { user };
-
+      await signInWithEmailAndPassword(auth, email, password);
+      navigate("/dashboard");
     } catch (err) {
-      const errorCode = err.code;
-      const errorMessage = err.message;
-      setError(errorMessage);
-
-      return { errorCode, errorMessage };
-
+      setError(err.message);
     } finally {
       setLoading(false);
     }
@@ -41,45 +29,70 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await userLogin();
-    setEmail("");
-    setPassword("");
   };
 
   return (
-    <div className="auth-container">
-      <h2 className="auth-title">Login</h2>
+    <div className="login-container">
+      <div className="login-card">
+        <div className="login-header">
+          <h2 className="login-title">Welcome Back</h2>
+          <p className="login-subtitle">Sign in to your account</p>
+        </div>
 
-        {error && <p className="error-message">{error}</p>}
+        {error && <div className="login-error">{error}</div>}
 
-      <form action="" className="auth-form" onSubmit={handleSubmit}>
-        <label htmlFor="">Email</label>
-        <input
-          type="email"
-          placeholder="Email"
-          className="auth-input"
-          required
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <p className="auth-navigate">
-          Don't remember your password? <Link to="/forgotpassword">Reset Password</Link>
-        </p>
-        <label htmlFor="">Password</label>
-        <input
-          type="password"
-          placeholder="Password"
-          className="auth-input"
-          required
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <p className="auth-navigate">
-          Don't have an account? <Link to="/signup">Sign Up</Link>
-        </p>
-        <button className="auth-btn" type="submit">
-          {loading ? "Loggin In..." : "Login"}
-        </button>
-      </form>
+        <form className="login-form" onSubmit={handleSubmit}>
+          <div className="input-group">
+            <div className="input-icon">
+              <FiMail />
+            </div>
+            <input
+              type="email"
+              placeholder="Email Address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className="input-group">
+            <div className="input-icon">
+              <FiLock />
+            </div>
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className="form-footer">
+            <Link to="/forgotpassword" className="forgot-password">
+              Forgot password?
+            </Link>
+          </div>
+
+          <button type="submit" className="login-btn" disabled={loading}>
+            {loading ? (
+              <span>Signing In...</span>
+            ) : (
+              <>
+                <span>Sign In</span>
+                <FiArrowRight />
+              </>
+            )}
+          </button>
+        </form>
+
+        <div className="login-footer">
+          Don't have an account?{" "}
+          <Link to="/signup" className="signup-link">
+            Create account
+          </Link>
+        </div>
+      </div>
     </div>
   );
 };
