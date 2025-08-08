@@ -1,8 +1,5 @@
 # Student Management System  
 
-![Project Screenshot](https://i.imgur.com/placeholder.png)  
-*A modern student management solution*
-
 ## 🔗 Live Demo  
 [![Vercel](https://img.shields.io/badge/View-Live%20Demo-brightgreen)](https://student-management-system-lilac-zeta.vercel.app/)  
 
