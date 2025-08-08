@@ -8,22 +8,10 @@ body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   background-color: #f8fafc;
   min-height: 100vh;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  background-color: #f8fafc;
-  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
+  /* padding: 1rem; */
   background-image: radial-gradient(
     circle at 20% 30%,
     rgba(79, 70, 229, 0.1) 0%,
@@ -196,32 +184,6 @@ body {
   }
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  background-color: #f8fafc;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-  background-image: radial-gradient(
-    circle at 20% 30%,
-    rgba(79, 70, 229, 0.1) 0%,
-    transparent 30%
-  ),
-  radial-gradient(
-    circle at 80% 70%,
-    rgba(124, 58, 237, 0.1) 0%,
-    transparent 30%
-  );
-}
-
 .signup-container {
   width: 100%;
   max-width: 480px;
@@ -363,32 +325,6 @@ body {
   .signup-subtitle {
     font-size: 1rem;
   }
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  background-color: #f8fafc;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-  background-image: radial-gradient(
-    circle at 20% 30%,
-    rgba(79, 70, 229, 0.1) 0%,
-    transparent 30%
-  ),
-  radial-gradient(
-    circle at 80% 70%,
-    rgba(124, 58, 237, 0.1) 0%,
-    transparent 30%
-  );
 }
 
 .forgot-container {
@@ -625,8 +561,7 @@ body {
 
 .dashboard-main {
   flex: 1;
-  max-width: 1200px;
-  width: 100%;
+  width: 100vw;
   margin: 2rem auto;
   padding: 0 1.5rem;
 }
