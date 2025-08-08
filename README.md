@@ -1,12 +1,66 @@
-# React + Vite
+# Student Management System  
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Project Screenshot](https://i.imgur.com/placeholder.png)  
+*A modern student management solution*
 
-Currently, two official plugins are available:
+## 🔗 Live Demo  
+[![Vercel](https://img.shields.io/badge/View-Live%20Demo-brightgreen)](https://student-management-system-lilac-zeta.vercel.app/)  
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features  
 
-## Expanding the ESLint configuration
+### 🔐 Authentication  
+- Secure email/password login  
+- User registration system  
+- Password reset functionality  
+- Protected dashboard routes  
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 📚 Student Management  
+- Add new student records  
+- Edit existing student information  
+- Delete student entries  
+- View all students in sortable table  
+- Form validation for data integrity  
+
+### 🎨 User Experience  
+- Clean, responsive interface  
+- Loading states and error handling  
+- Intuitive navigation  
+- Accessible design  
+
+## 🛠 Tech Stack  
+
+### Frontend  
+| Technology | Purpose |
+|------------|---------|
+| React.js | Frontend framework |
+| React Router | Navigation |
+| React Icons | UI icons |
+| CSS Modules | Styling |
+
+### Backend  
+| Service | Function |
+|---------|----------|
+| Firebase Auth | User authentication |
+| Firestore | Real-time database |
+| Firebase Hosting | Deployment |
+
+## 📂 Project Structure
+src/
+├── components/
+│   ├── Auth/
+│   │   ├── Login.js
+│   │   ├── Signup.js
+│   │   └── ForgotPassword.js
+│   └── Dashboard/
+│       └── Dashboard.js
+├── firebase.js
+├── App.js
+└── App.css
+
+
+## 🚀 Installation  
+
+1. Clone the repository:  
+```bash
+git clone https://github.com/your-username/student-management-system.git
+cd student-management-system
